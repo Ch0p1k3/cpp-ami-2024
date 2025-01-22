@@ -166,7 +166,7 @@ behavior
 behavior
 ---
 # Порядок байт
-![w:900 center](images/endian.jpg)
+![w:600 center](images/endian.jpg)
 [endian.cpp](code/endian.cpp)
 ---
 ---
