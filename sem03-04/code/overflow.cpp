@@ -3,6 +3,6 @@
 
 int main() {
     int32_t res = std::numeric_limits<int32_t>::max();
-    res += res;
+    res += 1;
     std::cout << res << std::endl;
 }

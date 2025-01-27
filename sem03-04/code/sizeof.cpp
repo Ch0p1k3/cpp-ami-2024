@@ -37,6 +37,7 @@ int main()
     println( "B) sizeof(int):                     ", sizeof(int)                  );
     println( "C) sizeof(short):                   ", sizeof(short)                );
     println( "D) sizeof(char):                    ", sizeof(char)                 );
+    println( "D) sizeof(size_t):                    ", sizeof(size_t)                 );
     println( "E) sizeof(CharChar):                ", sizeof(CharChar)             );
     println( "F) sizeof(CharCharInt):             ", sizeof(CharCharInt)          );
     println( "G) sizeof(IntCharChar):             ", sizeof(IntCharChar)          );

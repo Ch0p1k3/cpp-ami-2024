@@ -1,8 +1,8 @@
 CC=clang++
-CXXFLAGS=-O3 --std=c++20 -Wall -Werror
-EXTRA_CXXFLAGS=
+CXXFLAGS=-O3 --std=c++20
+EXTRA_CXXFLAGS= -Wall -Werror
 
-all: alignof struct ptr intmain
+all: alignof struct ptr intmain ptrub
 
 alignof:
 	$(CC) $(CXXFLAGS) $(EXTRA_CXXFLAGS) alignof.cpp -o alignof && ./alignof && rm -rf alignof
@@ -15,3 +15,6 @@ ptr:
 
 intmain:
 	$(CC) $(CXXFLAGS) $(EXTRA_CXXFLAGS) intmain.cpp -o intmain && ./intmain && rm -rf intmain
+
+ptrub:
+	$(CC) $(CXXFLAGS) ptrub.cpp -o ptrub && ./ptrub && rm -rf ptrub
