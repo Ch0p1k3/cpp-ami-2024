@@ -2,7 +2,7 @@ CC=clang++
 CXXFLAGS=-O3 --std=c++20 -Wall -Werror
 EXTRA_CXXFLAGS=
 
-all: alignof struct ptr
+all: alignof struct ptr intmain
 
 alignof:
 	$(CC) $(CXXFLAGS) $(EXTRA_CXXFLAGS) alignof.cpp -o alignof && ./alignof && rm -rf alignof
@@ -12,3 +12,6 @@ struct:
 
 ptr:
 	$(CC) $(CXXFLAGS) $(EXTRA_CXXFLAGS) ptr.cpp -o ptr && ./ptr && rm -rf ptr
+
+intmain:
+	$(CC) $(CXXFLAGS) $(EXTRA_CXXFLAGS) intmain.cpp -o intmain && ./intmain && rm -rf intmain
