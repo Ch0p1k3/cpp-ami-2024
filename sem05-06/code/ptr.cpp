@@ -1,21 +1,18 @@
+#include <cstdint>
+#include <cstring>
 #include <iostream>
 
-int* GetPtr(int a) {
-    // return &a;
-    return nullptr;
-}
-
-int* GetPtr2(int& a) {
-    return &a;
-}
 
 int main() {
-    // const auto* ptr = GetPtr(5);
-    {
-        int a = 3;
-        std::cout << a << std::endl;
-    }
-    int a = 2;
-    const auto* ptr2 = GetPtr2(a);
-    std::cout << *ptr2 << std::endl;
+    char str[] = "Hello";
+    char* ptr = str;
+    std::cout << static_cast<char>(*ptr + 1) << std::endl;
+    uintptr_t uptr = (uintptr_t)ptr;
+    std::cout << "ptr=" << ptr << std::endl;
+    std::cout << "uptr=" << std::hex << uptr << std::endl;
+    std::cout << sizeof(str) << std::endl;
+    std::cout << static_cast<int>(str[5]) << std::endl;
+    std::cout << std::strlen(str) << std::endl;
+    std::string std_string;
+    std::cout << std_string.size() << std::endl;
 }

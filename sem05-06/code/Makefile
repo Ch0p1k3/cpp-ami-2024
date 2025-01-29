@@ -1,6 +1,6 @@
 CC=clang++
 CXXFLAGS=-O3 --std=c++20
-EXTRA_CXXFLAGS= -Wall -Werror
+EXTRA_CXXFLAGS=-Wall -Werror -fsanitize=address
 
 all: alignof struct ptr intmain ptrub
 
