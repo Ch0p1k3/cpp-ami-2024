@@ -21,7 +21,14 @@ public:
 
     bool Empty() const;
 
+    std::size_t Size() const;
+
     ~Stack();
+
+private:
+    void Copy(const Stack& s);
+
+    void Free();
 
 private:
     struct Node {
@@ -30,5 +37,6 @@ private:
     };
 
 private:
-    /* some fields */
+    Node* head_;
+    std::size_t size_;
 };

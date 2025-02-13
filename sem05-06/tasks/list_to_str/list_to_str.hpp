@@ -6,5 +6,13 @@ struct ListNode {
 };
 
 std::string ListToString(ListNode* node) {
-    return "";
+    std::string result;
+    while (node) {
+        result += std::to_string(node->val);
+        if (node->next) {
+            result += " ";
+        }
+        node = node->next;
+    }
+    return result;
 }

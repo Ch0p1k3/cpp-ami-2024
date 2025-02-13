@@ -1,6 +1,6 @@
 CC=clang++
-CXXFLAGS=-O3 --std=c++20
-EXTRA_CXXFLAGS=-Wall -Werror -fsanitize=address
+CXXFLAGS=-O3 --std=c++17
+EXTRA_CXXFLAGS=
 
 all: alignof struct ptr intmain ptrub
 
@@ -14,7 +14,7 @@ ptr:
 	$(CC) $(CXXFLAGS) $(EXTRA_CXXFLAGS) ptr.cpp -o ptr && ./ptr && rm -rf ptr
 
 intmain:
-	$(CC) $(CXXFLAGS) $(EXTRA_CXXFLAGS) intmain.cpp -o intmain && ./intmain && rm -rf intmain
+	$(CC) $(CXXFLAGS) $(EXTRA_CXXFLAGS) intmain.cpp -o intmain
 
 ptrub:
 	$(CC) $(CXXFLAGS) ptrub.cpp -o ptrub && ./ptrub && rm -rf ptrub

@@ -2,59 +2,47 @@
 
 #include <cstddef>
 #include <initializer_list>
-#include <deque>
+
+#include <stack/stack.hpp>
 
 class Deque {
 public:
+    using Value = Stack::Value;
+
+public:
     Deque() = default;
-    Deque(const Deque& other) = default;
-    Deque(Deque&& other) = default;
+    Deque(const Deque& other);
+    Deque(Deque&& other);
 
-    explicit Deque(size_t size) : data_(size) {
-    }
+    explicit Deque(size_t size);
 
-    Deque(std::initializer_list<int> list) : data_{list} {
-    }
+    Deque(std::initializer_list<Value> list);
 
-    Deque& operator=(const Deque& other) = default;
-    Deque& operator=(Deque&& other) = default;
+    Deque& operator=(const Deque& other) const;
+    Deque& operator=(Deque&& other);
 
-    void Swap(Deque& other) {
-        std::swap(data_, other.data_);
-    }
+    void Swap(Deque& other);
 
-    void PushBack(int value) {
-        data_.push_back(value);
-    }
+    void PushBack(Value value);
 
-    void PopBack() {
-        data_.pop_back();
-    }
+    void PopBack();
 
-    void PushFront(int value) {
-        data_.push_front(value);
-    }
+    void PushFront(Value value);
 
-    void PopFront() {
-        data_.pop_front();
-    }
+    void PopFront();
 
-    int& operator[](size_t index) {
-        return data_[index];
-    }
+    size_t Size() const;
 
-    const int& operator[](size_t index) const {
-        return data_[index];
-    }
+    size_t Empty() const;
 
-    size_t Size() const {
-        return data_.size();
-    }
-
-    void Clear() {
-        data_.clear();
-    }
+    void Clear();
 
 private:
-    std::deque<int> data_;
+    void MoveHalfToFirst();
+
+    void MoveHalfToSecond();
+
+private:
+    Stack first_;
+    Stack second_;
 };
