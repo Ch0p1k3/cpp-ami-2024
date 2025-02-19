@@ -30,6 +30,8 @@ bool operator<(const Student& left, const Student& right) {
     return std::tie(right.grade, left.name, left.surname) < std::tie(left.grade, right.name, right.surname);
 }
 
+std::string Foo();
+
 int main() {
     std::vector<Student> students = {
         {"Chil", "Guy", Grade::Three},
@@ -42,4 +44,6 @@ int main() {
     for (const auto& student : students) {
         std::cout << student << std::endl;
     }
+
+    std::cout << Foo() << std::endl;
 }
