@@ -59,6 +59,13 @@ void Deque::PopBack() {
     second_.Pop();
 }
 
+Deque::Value Deque::operator[](size_t i) {
+    if (i < first_.Size()) {
+        return first_[i];
+    }
+    return second_[i - first_.Size()];
+}
+
 void Deque::PushFront(Value value) {
     first_.Push(value);
 }

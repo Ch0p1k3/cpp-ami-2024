@@ -21,6 +21,8 @@ public:
     Deque& operator=(const Deque& other) const;
     Deque& operator=(Deque&& other);
 
+    Value operator[](size_t i);
+
     void Swap(Deque& other);
 
     void PushBack(Value value);

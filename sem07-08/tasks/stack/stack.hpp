@@ -13,6 +13,8 @@ public:
 
     Stack& operator=(const Stack& other);
 
+    Value operator[](std::size_t i);
+
     void Push(Value value);
 
     Value Top() const;

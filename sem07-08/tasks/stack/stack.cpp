@@ -28,6 +28,14 @@ Stack& Stack::operator=(const Stack& other) {
     return *this;
 }
 
+Stack::Value Stack::operator[](std::size_t i) {
+    auto* node = head_;
+    while (i-- != 0) {
+        node = node->next;
+    }
+    return node->value;
+}
+
 void Stack::Push(Value value) {
     head_ = new Node{value, head_};
     ++size_;
