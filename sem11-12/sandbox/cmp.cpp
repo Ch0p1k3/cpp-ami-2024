@@ -34,7 +34,7 @@ std::string Foo();
 
 int main() {
     std::vector<Student> students = {
-        {"Chil", "Guy", Grade::Three},
+        {"Chill", "Guy", Grade::Three},
         {"Ivan", "Luchsh", Grade::Five},
         {"Maxim", "Bassalaev", Grade::Two},
     };
