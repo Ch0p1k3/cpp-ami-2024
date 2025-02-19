@@ -1,40 +1,23 @@
 #pragma once
 
 #include <cstring>
-#include <stdexcept>
 #include <string>
 
 class StringView {
 public:
-    StringView(const std::string& s, size_t beg = 0, size_t len = npos)
-        : begin_(s.c_str() + beg)
-        , len_(len == npos ? s.size() - beg : len) {
-    }
+    StringView(const std::string& s, size_t begin = 0, size_t len = npos);
 
-    StringView(const char* s)
-        : begin_(s)
-        , len_(std::strlen(s)) {
-    }
+    StringView(const char* s);
 
-    StringView(const char* s, size_t len)
-        : begin_(s)
-        , len_(len) {
-    }
+    StringView(const char* s, size_t len);
 
-    char operator[](size_t i) const {
-        if (i > len_) {
-            throw std::invalid_argument("i > len");
-        }
-        return *(begin_ + i);
-    }
+    char operator[](size_t i) const;
 
-    const char* Data() const {
-        return begin_;
-    }
+    const char* Data() const;
 
-    size_t Size() const {
-        return len_;
-    }
+    size_t Size() const;
+
+    StringView Substr(size_t begin, size_t cnt = npos);
 
 public:
     static const auto npos = std::string::npos;
