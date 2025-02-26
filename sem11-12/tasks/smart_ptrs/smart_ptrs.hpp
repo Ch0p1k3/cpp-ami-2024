@@ -1,93 +1,96 @@
 #pragma once
 
-#include <string>
+#include <cstddef>
+#include <utility>
 
-// class WeakPtr;
-
+template<typename T>
 class SharedPtr {
 public:
     SharedPtr() = default;
 
-    SharedPtr(std::string* ptr)
-        : ptr_(ptr)
-        , cnt_(new size_t{1}) {
-    }
-
     SharedPtr(const SharedPtr& other) {
-        NewPtr(other);
+        New(other);
     }
     SharedPtr& operator=(const SharedPtr& other) {
-        if (this == &other) {
-            return *this;
-        }
         Reset();
-        NewPtr(other);
+        New(other);
         return *this;
     }
 
-    const std::string* Get() const {
-        return ptr_;
+    SharedPtr(SharedPtr&& other) {
+        Swap(std::move(other));
     }
-
-    std::string* Get() {
-        return ptr_;
-    }
-
-    void Reset(std::string* new_ptr) {
+    SharedPtr& operator=(SharedPtr&& other) {
         Reset();
-        ptr_ = new_ptr;
-        cnt_ = new size_t{1};
+        Swap(std::move(other));
+        return *this;
     }
 
-    std::string& operator*() {
+    const T* Get() const {
+        return ptr_;
+    }
+
+    T& operator*() {
         return *ptr_;
     }
-    const std::string& operator*() const {
+
+    const T& operator*() const {
         return *ptr_;
     }
 
-    std::string* operator->() {
-        return Get();
+    T* operator->() {
+        return ptr_;
     }
 
-    const std::string* operator->() const {
-        return Get();
+    const T* operator->() const {
+        return ptr_;
     }
 
     ~SharedPtr() {
         Reset();
     }
+public:
+    template<typename Q, typename... TArgs>
+    friend SharedPtr<Q> MakeShared(TArgs... args);
 
 private:
+    void New(const SharedPtr& s) {
+        ptr_ = s.ptr_;
+        cnt_ = s.cnt_;
+        if (cnt_) {
+            ++*cnt_;
+        }
+    }
+
+    void Swap(SharedPtr&& s) {
+        std::swap(ptr_, s.ptr_);
+        std::swap(cnt_, s.cnt_);
+    }
+
     void Reset() {
-        if (!ptr_) {
+        if (!cnt_) {
             return;
         }
-
-        if (--(*cnt_) == 0) {
-            delete ptr_;
-            delete cnt_;
-            ptr_ = nullptr;
-            cnt_ = nullptr;
+        if (--*cnt_) {
+            return;
         }
+        delete ptr_;
+        delete cnt_;
+        ptr_ = nullptr;
+        cnt_ = nullptr;
     }
 
-    void NewPtr(const SharedPtr& other) {
-        ptr_ = other.ptr_;
-        cnt_ = other.cnt_;
-        if (cnt_) {
-            (*cnt_)++;
-        }
+    SharedPtr(T* ptr): ptr_(ptr), cnt_(new size_t{1}) {
     }
 
 private:
+    T* ptr_{nullptr};
     size_t* cnt_{nullptr};
-    std::string* ptr_{nullptr};
 };
 
-// class WeakPtr {
-// public:
-// };
 
-// SharedPtr::SharedPtr(const WeakPtr& rhs) {
-// }
+template<typename T, typename... TArgs>
+SharedPtr<T> MakeShared(TArgs... args) {
+    auto* ptr = new T(std::forward<TArgs>(args)...);
+    return std::move(SharedPtr<T>(ptr));
+}

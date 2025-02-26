@@ -14,6 +14,7 @@ public:
     }
     UniquePtr& operator=(UniquePtr&& other) {
         std::swap(ptr_, other.ptr_);
+        return *this;
     }
 
     operator bool() const {
