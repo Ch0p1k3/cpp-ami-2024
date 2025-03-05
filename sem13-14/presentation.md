@@ -18,19 +18,16 @@ int main() {
         sum1 += el;
     }
     // sum1 == 45
-
     int sum2 = 0;
     std::for_each(data.begin(), data.end(), [&sum2](int el) {
         sum2 += el;
     });
     // sum2 == 45
-
     int sum3 = 0;
     std::for_each_n(data.begin(), data.size(), [&sum3](int el) {
         sum3 += el;
     });
     // sum3 == 45
-
     std::cout << sum1 << ' ' << sum2 << ' ' << sum3 << std::endl;
 }
 ```
