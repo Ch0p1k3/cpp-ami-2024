@@ -23,10 +23,13 @@ auto CreateRandomRange(T min_value = 0, T max_value = 100) {
 
 int main() {
     static constexpr auto kVectorSize = 100;
-    std::vector<int> v;
-    v.reserve(kVectorSize);
-    for (const auto e : CreateRandomRange() | std::ranges::views::take(kVectorSize)) {
-        v.push_back(std::move(e));
+    // https://en.cppreference.com/w/cpp/ranges/to
+    std::vector<int> v /* = CreateRandomRange() | std::ranges::views::take(kVectorSize) | std::ranges::to<std::vector>() */;
+    {
+        v.reserve(kVectorSize);
+        for (const auto e : CreateRandomRange() | std::ranges::views::take(kVectorSize)) {
+            v.push_back(std::move(e));
+        }
     }
     std::ranges::sort(v);
     for (const auto e : v) {
